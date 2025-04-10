@@ -16,6 +16,7 @@
                 <li><a href="#products">Produk</a></li>
                 <li><a href="#testimonials">Testimoni</a></li>
                 <li><a href="#contact">Kontak</a></li>
+                <li><a href="{{ route('admin.products') }}">Admin</a></li>
             </ul>
         </nav>
     </header>
@@ -50,27 +51,15 @@
     <section id="products">
         <h2>Produk Unggulan</h2>
         <div class="product-list">
+            @foreach($products as $product)
             <article class="product-item">
-                <h3>Python Series</h3>
-                <img src="../Asset/gambar1.png" alt="Sepatu Sneakers" style="width:100%; height:auto;">
-                <p>Deskripsi singkat tentang sepatu gunung.</p>
-                <span>Harga: Rp 500.000</span>
+                <h3>{{ $product->name }}</h3>
+                <img src="{{ asset('images/' . $product->image) }}" alt="{{ $product->name }}" style="width:100%; height:auto;">
+                <p>{{ $product->description }}</p>
+                <span>Harga: Rp {{ number_format($product->price, 0, ',', '.') }}</span>
                 <a href="#contact" class="btn">Beli Sekarang</a>
             </article>
-            <article class="product-item">
-                <h3>Rexsar Series</h3>
-                <img src="../Asset/gambar2.png" alt="Sepatu Formal" style="width:100%; height:auto;">
-                <p>Deskripsi singkat tentang sepatu gunung.</p>
-                <span>Harga: Rp 750.000</span>
-                <a href="#contact" class="btn">Beli Sekarang</a>
-            </article>
-            <article class="product-item">
-                <h3>Furion Series</h3>
-                <img src="../Asset/gambar3.png" alt="Sepatu Olahraga" style="width:100%; height:auto;">
-                <p>Deskripsi singkat tentang sepatu gunung.</p>
-                <span>Harga: Rp 600.000</span>
-                <a href="#contact" class="btn">Beli Sekarang</a>
-            </article>
+            @endforeach
         </div>
     </section>
 
@@ -78,14 +67,20 @@
         <h2>Apa Kata Pelanggan Kami?</h2>
         <div class="video-list">
             <div class="video-item">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID_1" title="Testimoni Pelanggan 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Testimoni Pelanggan 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
     </section>
 
     <section id="contact">
         <h2>Hubungi Kami</h2>
-        <form action="#" method="post">
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        <form action="{{ route('contact.store') }}" method="POST">
+            @csrf
             <label for="name">Nama:</label>
             <input type="text" id="name" name="name" required>
             
@@ -106,5 +101,22 @@
         <p>Alamat: Jl. Contoh No. 123, Jakarta</p>
         <p>Email: info@storesepatu.com</p>
     </footer>
+
+    <!-- Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <img id="modalImage" src="" alt="Product Image">
+            <p id="modalDescription"></p>
+            <p id="modalPrice"></p>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <img id="lightboxImage" src="" alt="Lightbox Image">
+    </div>
 </body>
 </html>
