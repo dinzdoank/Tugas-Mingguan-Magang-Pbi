@@ -1,0 +1,368 @@
+.carousel {
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-item {
+    display: none;
+    text-align: center;
+    color: #fff;
+    padding: 100px 20px;
+}
+
+.carousel-item.active {
+    display: block;
+}
+
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.carousel-controls .prev, .carousel-controls .next {
+    cursor: pointer;
+    font-size: 24px;
+    color: #fff;
+    padding: 10px;
+}
+
+/* Reset dasar untuk menghilangkan margin dan padding default */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Mengatur font dasar dan warna latar belakang */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4; /* Warna latar belakang yang netral */
+    color: #333;
+}
+
+/* Header dan navigasi */
+/* Nav menu responsif */
+.nav-toggle {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+    padding: 10px 20px;
+}
+
+@media (max-width: 768px) {
+    nav {
+        position: relative;
+    }
+
+    .nav-toggle {
+        display: block;
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        z-index: 1000;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        background-color: #4e3b31;
+        position: absolute;
+        top: 50px;
+        right: 0;
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+        z-index: 999;
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+}
+
+header {
+    background: #4e3b31; /* Coklat tua */
+    color: #fff;
+    padding: 10px 0;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Hero section */
+#hero {
+    background: url('../Asset/hero-image.png') no-repeat center center/cover; /* Ganti dengan gambar outdoor yang sesuai */
+    color: #fff;
+    text-align: center;
+    padding: 100px 20px;
+    background-color: #6b4f3a; /* Coklat medium sebagai fallback */
+    position: relative; /* Untuk menempatkan elemen di atas */
+}
+
+#hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Layer gelap untuk kontras teks */
+    z-index: 1; /* Menempatkan layer di belakang teks */
+}
+
+#hero h1, #hero p {
+    position: relative; /* Agar teks muncul di atas layer gelap */
+    z-index: 2; /* Menempatkan teks di atas layer gelap */
+}
+
+#hero .btn {
+    position: relative;
+    z-index: 2;
+    margin-top: 20px;
+    background-color: #c69c6d;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+#hero .btn:hover {
+    background-color: #0056b3;
+}
+
+/* Tombol beli di setiap produk */
+.product-item .btn {
+    margin-top: 16px;
+    background-color: #c69c6d;
+    color: white;
+    padding: 10px 0;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.product-item .btn:hover {
+    background-color: #a4784f;
+}
+
+
+.product-item {
+    border: 1px solid #ccc;
+    padding: 16px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.product-item .btn {
+    margin-top: 12px;
+    width: 100%;
+}
+/* Section produk */
+#products {
+    padding: 20px;
+    background: #fff;
+    text-align: center;
+}
+
+.product-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.product-item {
+    background: #e8d4c1; /* Coklat muda */
+    border: 1px solid #d1b7a1; /* Coklat lebih gelap */
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px;
+    width: 30%; /* Atur lebar sesuai kebutuhan */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.product-item h3 {
+    margin-bottom: 10px;
+}
+
+/* Section testimoni */
+#testimonials {
+    padding: 20px;
+    background: #f0e4d7; /* Coklat sangat muda */
+    text-align: center;
+}
+
+blockquote {
+    margin: 20px auto;
+    font-style: italic;
+}
+
+/* Formulir kontak */
+#contact {
+    padding: 20px;
+    background: #fff;
+    text-align: center;
+}
+
+form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+form label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #d1b7a1; /* Coklat lebih gelap */
+    border-radius: 5px;
+}
+
+form button {
+    background: #c69c6d; /* Coklat muda */
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Footer */
+footer {
+    background: #4e3b31; /* Coklat tua */
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 8px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#backToTop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4e3b31;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    display: none; /* Hidden by default */
+}
+
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.lightbox-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 80%;
+}
+
+.video-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.video-item {
+    margin: 15px 0;
+    text-align: center;
+}
+
+.video-item h4 {
+    margin-bottom: 10px;
+}
