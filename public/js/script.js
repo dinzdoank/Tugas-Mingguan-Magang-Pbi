@@ -220,3 +220,43 @@ if (lightbox && lightboxImage && closeLightbox) {
         }
     });
 }
+
+// Fungsi untuk menangani form kontak
+const contactForm = document.getElementById('contact-form');
+const contactMessage = document.getElementById('contact-message');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+        
+        // Validasi form
+        if (!name || !email || !message) {
+            showContactMessage('Semua field harus diisi', 'error');
+            return;
+        }
+        
+        if (!validateEmail(email)) {
+            showContactMessage('Format email tidak valid', 'error');
+            return;
+        }
+        
+        // Simulasi pengiriman pesan
+        showContactMessage('Pesan Anda telah berhasil dikirim. Terima kasih telah menghubungi kami!', 'success');
+        contactForm.reset();
+    });
+}
+
+function showContactMessage(message, type) {
+    contactMessage.textContent = message;
+    contactMessage.style.display = 'block';
+    contactMessage.className = `alert alert-${type}`;
+    
+    // Sembunyikan pesan setelah 5 detik
+    setTimeout(() => {
+        contactMessage.style.display = 'none';
+    }, 5000);
+}

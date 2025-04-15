@@ -74,13 +74,8 @@
 
     <section id="contact">
         <h2>Hubungi Kami</h2>
-        @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-        <form action="{{ route('contact.store') }}" method="POST">
-            @csrf
+        <div id="contact-message" class="alert" style="display: none;"></div>
+        <form id="contact-form">
             <label for="name">Nama:</label>
             <input type="text" id="name" name="name" required>
             
