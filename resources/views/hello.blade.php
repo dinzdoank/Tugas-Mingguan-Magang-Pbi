@@ -54,7 +54,7 @@
             @foreach($products as $product)
             <article class="product-item">
                 <h3>{{ $product->name }}</h3>
-                <img src="{{ asset('images/' . $product->image) }}" alt="{{ $product->name }}" style="width:100%; height:auto;">
+                <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" style="width:100%; height:auto;">
                 <p>{{ $product->description }}</p>
                 <span>Harga: Rp {{ number_format($product->price, 0, ',', '.') }}</span>
                 <a href="#contact" class="btn">Beli Sekarang</a>
