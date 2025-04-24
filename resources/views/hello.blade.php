@@ -54,7 +54,7 @@
             @foreach($products as $product)
             <article class="product-item">
                 <h3>{{ $product->name }}</h3>
-                <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" style="width:100%; height:auto;">
+                <img src="{{ asset('images/' . $product->image) }}" alt="{{ $product->name }}" style="width:100%; height:auto;">
                 <p>{{ $product->description }}</p>
                 <span>Harga: Rp {{ number_format($product->price, 0, ',', '.') }}</span>
                 <a href="#contact" class="btn">Beli Sekarang</a>
@@ -68,6 +68,8 @@
         <div class="video-list">
             <div class="video-item">
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Testimoni Pelanggan 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          
+          
             </div>
         </div>
     </section>
