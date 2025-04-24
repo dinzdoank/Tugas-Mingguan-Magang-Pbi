@@ -57,6 +57,7 @@
                 <img src="{{ asset('images/' . $product->image) }}" alt="{{ $product->name }}" style="width:100%; height:auto;">
                 <p>{{ $product->description }}</p>
                 <span>Harga: Rp {{ number_format($product->price, 0, ',', '.') }}</span>
+                <span>Stok: {{ $product->stock }}</span>
                 <a href="#contact" class="btn">Beli Sekarang</a>
             </article>
             @endforeach
