@@ -22,6 +22,15 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+            
+            // Cek role user
+            if (Auth::user()->role !== 'admin') {
+                Auth::logout();
+                return back()->withErrors([
+                    'email' => 'Silakan login melalui halaman user.',
+                ])->onlyInput('email');
+            }
+            
             return redirect()->intended('admin/products');
         }
 
@@ -35,6 +44,6 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/');
+        return redirect('/admin/login');
     }
 } 

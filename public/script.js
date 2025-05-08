@@ -9,16 +9,19 @@ document.addEventListener('DOMContentLoaded', () => {
             navMenu.classList.toggle('active');
         });
     }
-// Smooth scrolling for navigation links
-document.querySelectorAll('nav ul li a').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        document.querySelector(targetId).scrollIntoView({
-            behavior: 'smooth'
+    document.querySelectorAll('nav ul li a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            // Hanya lakukan smooth scroll jika href diawali dengan #
+            if (targetId && targetId.startsWith('#')) {
+                e.preventDefault();
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+            // Jika bukan anchor (#), biarkan browser melakukan default action (redirect)
         });
     });
-});
     // 2. Validasi form input pada halaman kontak
     const contactForm = document.querySelector('#contact form');
 
@@ -204,5 +207,33 @@ closeLightbox.addEventListener('click', () => {
 lightbox.addEventListener('click', (event) => {
     if (event.target === lightbox) {
         lightbox.style.display = 'none';
+    }
+});
+
+// Modal Order Produk
+const orderModal = document.getElementById('orderModal');
+const closeOrderModal = document.getElementById('closeOrderModal');
+const orderProductTitle = document.getElementById('orderProductTitle');
+const orderProductId = document.getElementById('orderProductId');
+
+// Buka modal order saat klik tombol Beli Sekarang
+const orderBtns = document.querySelectorAll('.order-btn');
+orderBtns.forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        const productId = this.getAttribute('data-product-id');
+        const productTitle = this.getAttribute('data-product-title');
+        orderProductId.value = productId;
+        orderProductTitle.textContent = 'Order: ' + productTitle;
+        orderModal.style.display = 'block';
+    });
+});
+
+// Tutup modal order
+closeOrderModal.addEventListener('click', () => {
+    orderModal.style.display = 'none';
+});
+window.addEventListener('click', (event) => {
+    if (event.target === orderModal) {
+        orderModal.style.display = 'none';
     }
 }); 

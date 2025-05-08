@@ -1,0 +1,102 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1;
+    background: url('../Asset/bg_login.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #333;
+    position: relative;
+}
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(110, 110, 110, 0.85); /* overlay abu semi-transparan */
+    z-index: 0;
+}
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+.login-card {
+    background: #fff;
+    padding: 32px 24px;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #d1b7a1;
+}
+.login-logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+.login-logo img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+.login-title {
+    text-align: center;
+    margin-bottom: 24px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4e3b31;
+}
+.login-form label {
+    font-weight: 500;
+    color: #4e3b31;
+}
+.login-form input[type="email"],
+.login-form input[type="password"] {
+    width: 100%;
+    margin-bottom: 16px;
+    padding: 8px 12px;
+    border: 1px solid #d1b7a1;
+    border-radius: 6px;
+    box-sizing: border-box;
+    background: #f0e4d7;
+    color: #4e3b31;
+}
+.login-form input[type="checkbox"] {
+    margin-right: 6px;
+}
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    background: #c69c6d;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.3s;
+}
+.login-form button:hover {
+    background: #a4784f;
+}
+.invalid-feedback {
+    color: #e3342f;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+.login-form a {
+    color: #a4784f;
+    text-decoration: underline;
+}
+.login-form a:hover {
+    color: #4e3b31;
+} 
