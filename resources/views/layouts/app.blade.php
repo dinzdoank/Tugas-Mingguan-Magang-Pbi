@@ -93,7 +93,13 @@
             </div>
         </nav>
         <main class="container my-4">
-            @yield('content')
+            @if(request()->is('admin/*'))
+                @auth
+                    @yield('content')
+                @endauth
+            @else
+                @yield('content')
+            @endif
         </main>
     </body>
 </html>     

@@ -28,6 +28,7 @@ class OrderController extends Controller
 
         // Simpan order
         $order = Order::create([
+            'user_id' => auth()->id(),
             'name' => $request->name,
             'email' => $request->email,
             'address' => $request->address,

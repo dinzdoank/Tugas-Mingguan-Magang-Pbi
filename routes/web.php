@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Notifications\OrderApproved;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -31,7 +32,8 @@ Route::middleware('auth')->group(function () {
 });
 
 // Route publik untuk simpan pesan kontak
-Route::post('/contact', [\App\Http\Controllers\ContactController::class, 'store'])->name('contact.store');
+Route::get('/contact', [App\Http\Controllers\ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [App\Http\Controllers\ContactController::class, 'store'])->name('contact.store');
 
 // Routes untuk admin
 Route::prefix('admin')->group(function () {
@@ -52,7 +54,15 @@ Route::prefix('admin')->group(function () {
             'destroy' => 'admin.products.destroy',
         ]);
         // Route untuk approve/reject order
-        Route::post('/orders/{order}/approve', [\App\Http\Controllers\OrderController::class, 'approvePayment'])->name('admin.orders.approve');
+        Route::post('/orders/{order}/approve', function (\App\Models\Order $order) {
+            $order->status = 'approved';
+            $order->save();
+
+            // Kirim notifikasi in-app ke user
+            $order->user->notify(new OrderApproved($order));
+
+            return redirect()->back()->with('success', 'Order berhasil di-ACC.');
+        })->name('admin.orders.approve');
         Route::post('/orders/{order}/reject', [\App\Http\Controllers\OrderController::class, 'rejectPayment'])->name('admin.orders.reject');
         // Route untuk halaman daftar order admin
         Route::get('/orders', [\App\Http\Controllers\OrderController::class, 'indexAdmin'])->name('admin.orders.index');
@@ -65,5 +75,16 @@ Route::prefix('admin')->group(function () {
         Route::post('/contact', [\App\Http\Controllers\ContactController::class, 'store'])->name('contact.store');
     });
 });
+
+Route::post('/notifications/mark-as-read', function () {
+    auth()->user()->unreadNotifications->markAsRead();
+    return response()->json(['success' => true]);
+})->middleware('auth');
+
+Route::post('/notifications/mark-as-read-one', function (\Illuminate\Http\Request $request) {
+    $notif = auth()->user()->notifications()->where('id', $request->id)->first();
+    if($notif) $notif->markAsRead();
+    return response()->json(['success' => true]);
+})->middleware('auth');
 
 require __DIR__.'/auth.php';

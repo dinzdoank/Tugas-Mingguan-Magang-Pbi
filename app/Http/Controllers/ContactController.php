@@ -2,25 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Contact;
 use Illuminate\Http\Request;
+use App\Models\Contact;
 
 class ContactController extends Controller
 {
-    // Simpan pesan dari form
+    public function index()
+    {
+        return view('contact');
+    }
+
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email',
-            'message' => 'required|string',
+            'email' => 'required|email|max:255',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string'
         ]);
-        Contact::create($request->only('name', 'email', 'message'));
-        return back()->with('success', 'Pesan Anda berhasil dikirim!');
+
+        Contact::create($validated);
+
+        return redirect()->back()->with('success', 'Pesan Anda telah berhasil dikirim. Kami akan segera menghubungi Anda.');
     }
 
     // Admin: tampilkan daftar pesan
-    public function index()
+    public function indexAdmin()
     {
         $contacts = Contact::orderByDesc('created_at')->get();
         return view('admin.contacts.index', compact('contacts'));

@@ -23,12 +23,6 @@
         </div>
 
         <button type="submit">Log in</button>
-
-        <div style="margin-top: 12px; text-align:right;">
-            @if (Route::has('password.request'))
-                <a href="{{ route('password.request') }}" style="font-size: 0.9rem;">Forgot your password?</a>
-            @endif
-        </div>
     </form>
 
     <div style="text-align:center; margin-top:18px;">
